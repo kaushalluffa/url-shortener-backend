@@ -18,7 +18,7 @@ This is a URL shortener backend built using Fastify. It provides API endpoints t
 
 ### Clone the Repository
 ```sh
-git clone https://github.com/your-username/url-shortener-backend.git
+git clone https://github.com/kaushalluffa/url-shortener-backend.git
 cd url-shortener-backend
 ```
 
