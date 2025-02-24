@@ -12,7 +12,6 @@
     "build": "tsc",
     "watch": "tsc -w",
     "dev": "tsx --watch src/server.ts",
-    "dev:start": "npm run build && fastify start --ignore-watch=.ts$ -w -l info -P dist/app.js",
     "test": "npm run db:seed && c8 npm run test:run",
     "test:run": "glob -c \"tsx --test\" \"./test/**/*.ts\"",
     "standalone": "npm run build && node --env-file=.env dist/server.js",
