@@ -9,7 +9,6 @@ This is a URL shortener backend built using Fastify. It provides API endpoints t
 - Fast and lightweight backend using Fastify
 - MongoDB for URL storage
 - JWT authentication for secure access
-- Rate limiting for API protection
 - Swagger UI for API documentation
 - Environment-based configurations
 
@@ -35,30 +34,9 @@ Create a `.env` file and configure necessary variables:
 ```env
 PORT=3030
 MONGODB_URI='mongodb://localhost:27017'
-COOKIE_SECRET='__cookie_secret__'
-COOKIE_NAME='__cookie_name__'
-COOKIE_SECURED=false
-RATE_LIMIT_MAX=''
-RATE_LIMIT_TIME_WINDOW=''
-UPLOAD_DIRNAME=''
-UPLOAD_TASKS_DIRNAME=''
 MONGODB_DB_NAME=''
-HSTS_ENABLED=''
-HSTS_MAX_AGE=''
-HSTS_INCLUDE_SUB_DOMAINS=''
-HSTS_PRELOAD=''
-X_FRAME_OPTIONS=''
-UNDER_PRESSURE_MAX_EVENT_LOOP_DELAY=1000
-UNDER_PRESSURE_MAX_HEAP_USED_BYTES=''
-UNDER_PRESSURE_MAX_RSS_BYTES=''
-UNDER_PRESSURE_MAX_EVENT_LOOP_UTILIZATION=''
-UNDER_PRESSURE_MESSAGE=''
-UNDER_PRESSURE_RETRY_AFTER=''
-UNDER_PRESSURE_HEALTH_CHECK_INTERVAL=''
 MONGODB_HEALTH_CHECK_COLLECTION='mongodb_health_check_collection'
-SESSION_SECRET_KEY=''
 JWT_SECRET_KEY=''
-SESSION_NAME=__session__
 ```
 
 ## Running the Server
