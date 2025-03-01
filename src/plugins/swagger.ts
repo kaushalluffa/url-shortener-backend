@@ -9,12 +9,12 @@ export default fp(async function (fastify) {
    * @see {@link https://github.com/fastify/fastify-swagger}
    */
   await fastify.register(fastifySwagger, {
-    hideUntagged: true,
+    // hideUntagged: true,
     openapi: {
       info: {
         title: 'URL Shortener API',
         description: 'API documentation for URL Shortener',
-        version: '0.0.0'
+        version: '1.0.0'
       }
     }
   })
@@ -25,6 +25,24 @@ export default fp(async function (fastify) {
    * @see {@link https://github.com/fastify/fastify-swagger-ui}
    */
   await fastify.register(fastifySwaggerUi, {
-    routePrefix: '/api/docs'
-  })
+    routePrefix: "/api/v1/docs",
+    uiConfig: {
+      docExpansion: "list",
+      deepLinking: false,
+    },
+    uiHooks: {
+      onRequest: function (request, reply, next) {
+        next();
+      },
+      preHandler: function (request, reply, next) {
+        next();
+      },
+    },
+    staticCSP: true,
+    transformStaticCSP: (header) => header,
+    transformSpecification: (swaggerObject, request, reply) => {
+      return swaggerObject;
+    },
+    transformSpecificationClone: true,
+  });
 })
