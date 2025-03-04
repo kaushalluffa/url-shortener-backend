@@ -6,8 +6,9 @@ export default async function login(
   request: FastifyRequest<{ Body: { email: string; password: string } }>,
   reply: FastifyReply
 ) {
+  const fastifyInstance = request.server;
+  const { jwt } = fastifyInstance;
   const { email, password } = request.body;
-
   const user = await User.findOne({ email });
   if (!user) {
     return reply.code(400).send({ message: "User not found" });
@@ -16,12 +17,11 @@ export default async function login(
   if (!isPasswordValid) {
     return reply.code(400).send({ message: "Invalid password" });
   }
-  const refreshToken = request.jwt.sign({ userId: user._id });
-  const accessToken = request.jwt.sign({ userId: user._id });
+  const refreshToken = jwt?.sign({ userId: user._id });
+  const accessToken = jwt?.sign({ userId: user._id });
   return reply
-    .setCookie("refresh_token", refreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+    .headers({
+      "set-cookie": `refresh_token=${refreshToken}; HttpOnly; Secure; Path=/; SameSite=Strict`,
     })
     .code(200)
     .send({ accessToken });

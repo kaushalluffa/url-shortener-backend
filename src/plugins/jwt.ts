@@ -3,12 +3,11 @@ import fastifyJwt from "@fastify/jwt";
 import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 
 export default async function jwtPlugin(fastify: FastifyInstance) {
-  fastify.register(fastifyJwt, {
+  await fastify.register(fastifyJwt, {
     secret: process.env.JWT_SECRET_KEY!,
   });
-  fastify.register(fastifyCookie, {
+  await fastify.register(fastifyCookie, {
     secret: process.env.COOKIE_SECRET_KEY!,
-    hook: "preHandler",
   });
   fastify.decorate(
     "authenticate",
