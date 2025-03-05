@@ -3,7 +3,6 @@ import { JWT } from "@fastify/jwt";
 import { FastifyInstance, FastifyPluginOptions } from "fastify";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import jwtPlugin from "./plugins/jwt.js";
 declare module "fastify" {
   export interface FastifyRequest {
     jwt: JWT;
@@ -36,7 +35,6 @@ export default async function serviceApp(
     dir: join(__dirname, "./plugins"),
     options: { ...opts },
   });
-  fastify.register(jwtPlugin);
 
   // This loads all plugins defined in routes
   // define your routes in one of these

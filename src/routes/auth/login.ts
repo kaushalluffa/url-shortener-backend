@@ -16,8 +16,8 @@ export default async function login(
   if (!isPasswordValid) {
     return reply.code(400).send({ message: "Invalid password" });
   }
-  const refreshToken = request.jwt.sign({ userId: user._id });
-  const accessToken = request.jwt.sign({ userId: user._id });
+  const refreshToken = request.server.jwt.sign({ userId: user._id }, { expiresIn: "30d" });
+  const accessToken = request.server.jwt.sign({ userId: user._id }, { expiresIn: "15m" });
   return reply
     .setCookie("refresh_token", refreshToken, {
       httpOnly: true,
