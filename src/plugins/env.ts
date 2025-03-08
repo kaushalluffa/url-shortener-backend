@@ -1,4 +1,5 @@
 import env from "@fastify/env";
+import fp from 'fastify-plugin';
 
 declare module "fastify" {
   export interface FastifyInstance {
@@ -8,6 +9,11 @@ declare module "fastify" {
       MONGODB_DB_NAME: string;
       MONGODB_HEALTH_CHECK_COLLECTION: string;
       JWT_SECRET_KEY: string;
+      COOKIE_SECRET: string;
+      CORS_ORIGIN_URL: string;
+      REFRESH_TOKEN_EXPIRES_IN: string;
+      ACCESS_TOKEN_EXPIRES_IN: string;
+      NODE_ENV: string;
     };
   }
 }
@@ -18,6 +24,10 @@ const schema = {
     "MONGODB_URI",
     "MONGODB_DB_NAME",
     "JWT_SECRET_KEY",
+    "CORS_ORIGIN_URL",
+    "REFRESH_TOKEN_EXPIRES_IN",
+    "ACCESS_TOKEN_EXPIRES_IN",
+    "NODE_ENV",
   ],
   properties: {
     // Server
@@ -35,6 +45,19 @@ const schema = {
       type: "string",
       default: "health",
     },
+    CORS_ORIGIN_URL: {
+      type: "string",
+    },
+    REFRESH_TOKEN_EXPIRES_IN: {
+      type: "string",
+    },
+    ACCESS_TOKEN_EXPIRES_IN: {
+      type: "string",
+    },
+    NODE_ENV: {
+      type: "string",
+      enum: ["development", "production"],
+    }
   },
 };
 
@@ -64,4 +87,6 @@ export const autoConfig = {
  *
  * @see {@link https://github.com/fastify/fastify-env}
  */
-export default env;
+export default fp(async (fastify) => {
+  fastify.register(env, autoConfig);
+}, { name: "config" });
