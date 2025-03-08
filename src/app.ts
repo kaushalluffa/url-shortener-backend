@@ -3,6 +3,7 @@ import { JWT } from "@fastify/jwt";
 import { FastifyInstance, FastifyPluginOptions } from "fastify";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { pluginsList } from "./plugins/index.js";
 declare module "fastify" {
   export interface FastifyRequest {
     jwt: JWT;
@@ -29,12 +30,11 @@ export default async function serviceApp(
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = dirname(__filename);
 
-  // This loads all external plugins defined in plugins/external
-  // those should be registered first as your custom plugins might depend on them
-  await fastify.register(fastifyAutoload, {
-    dir: join(__dirname, "./plugins"),
-    options: { ...opts },
-  });
+
+  for (const plugin of pluginsList) {
+    const pluginModule = await import(join(__dirname, plugin));
+    fastify.register(pluginModule.default, { ...opts });
+  }
 
   // This loads all plugins defined in routes
   // define your routes in one of these
