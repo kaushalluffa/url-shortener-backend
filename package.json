@@ -5,7 +5,7 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "fastify start -l info server/app.js",
+    "start": "node src/server.js",
     "dev": "node --watch-path=./src src/server.js",
     "lint": "eslint --ignore-pattern=dist",
     "lint:fix": "npm run lint -- --fix"
@@ -22,7 +22,6 @@
     "bcrypt": "^5.1.1",
     "close-with-grace": "^2.2.0",
     "fastify": "^5.0.0",
-    "fastify-cli": "^7.3.0",
     "fastify-plugin": "^5.0.1",
     "mongodb": "^6.13.0",
     "mongoose": "^8.10.1",
