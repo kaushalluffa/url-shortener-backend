@@ -14,7 +14,7 @@ export default async function shorten(
     long_url,
     short_url: shortUrlBase62Code,
     click_count: 0,
-    user_id: request.user.user_id,
+    user_id: request.user.userId,
   });
   if (!urlMapping) {
     return reply.code(500).send({ message: "Error generating short url" });
