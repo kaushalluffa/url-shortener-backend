@@ -49,6 +49,7 @@ export default async function login(
     .setCookie("refresh_token", newRefreshToken, {
       httpOnly: true,
       secure: request.server.config.NODE_ENV === "production",
+      path: "/",
     })
     .code(200)
     .send({ accessToken, user });
