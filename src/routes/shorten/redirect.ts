@@ -13,5 +13,10 @@ export default async function redirect(
   if (!longUrl || !longUrl.long_url) {
     return reply.code(404).send({ message: "URL not found" });
   }
-  reply.redirect(longUrl.long_url, 301);
+  await UrlMapping.updateOne(
+    { short_url },
+    { $inc: { click_count: 1 } }
+  );
+
+  reply.code(200).send({ longUrl: longUrl.long_url });
 }
