@@ -18,6 +18,12 @@ export const redirectSchema = {
         long_url: { type: "string" },
         created_at: { type: "string" },
       },
-    }
+    },
+    200: {
+      type: "object",
+      properties: {
+        longUrl: { type: "string" },
+      },
+    },
   },
 };
