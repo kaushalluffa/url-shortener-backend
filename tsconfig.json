@@ -3,7 +3,8 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src",
-    "target": "ES2016"
+    "target": "ES2016",
+    "moduleResolution": "nodenext"
   },
   "include": ["@types", "src/**/*.ts"]
 }
