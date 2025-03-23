@@ -1,29 +1,12 @@
 import fastifyAutoload from "@fastify/autoload";
-import { JWT } from "@fastify/jwt";
-import { FastifyInstance, FastifyPluginOptions } from "fastify";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { pluginsList } from "./plugins/index.js";
-declare module "fastify" {
-  export interface FastifyRequest {
-    jwt: JWT;
-  }
-  export interface FastifyInstance {
-    authenticate: any;
-  }
-}
-declare module "@fastify/jwt" {
-  interface FastifyJWT {
-    user: {
-      userId: string;
-      email: string;
-      name: string;
-    };
-  }
-}
+
+
 export default async function serviceApp(
-  fastify: FastifyInstance,
-  opts: FastifyPluginOptions
+  fastify,
+  opts
 ) {
   delete opts.skipOverride; // This option only serves testing purpose
   // Register plugins

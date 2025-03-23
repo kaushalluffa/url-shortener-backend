@@ -1,22 +1,6 @@
 import env from "@fastify/env";
 import fp from "fastify-plugin";
 
-declare module "fastify" {
-  export interface FastifyInstance {
-    config: {
-      PORT: number;
-      MONGODB_URI: string;
-      MONGODB_DB_NAME: string;
-      JWT_SECRET_KEY: string;
-      COOKIE_SECRET: string;
-      CORS_ORIGIN_URL: string;
-      REFRESH_TOKEN_EXPIRES_IN: string;
-      ACCESS_TOKEN_EXPIRES_IN: string;
-      NODE_ENV: string;
-    };
-  }
-}
-
 const schema = {
   type: "object",
   required: [

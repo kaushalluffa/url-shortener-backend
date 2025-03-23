@@ -1,10 +1,9 @@
 import fastifyCookie from "@fastify/cookie";
 import fastifyJwt from "@fastify/jwt";
-import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import fp from "fastify-plugin";
 
 export default fp(
-  async (fastify: FastifyInstance) => {
+  async (fastify) => {
     const jwtSecret = process.env.JWT_SECRET_KEY;
     const cookieSecret = process.env.COOKIE_SECRET;
 
@@ -15,7 +14,7 @@ export default fp(
     fastify.register(fastifyCookie, { secret: cookieSecret });
     fastify.decorate(
       "authenticate",
-      async (request: FastifyRequest, reply: FastifyReply) => {
+      async (request, reply) => {
         const { jwt, log } = fastify;
         try {
           const authHeaders = request.headers.authorization;
@@ -25,7 +24,7 @@ export default fp(
           const accessToken = authHeaders.split(" ")[1];
           jwt.verify(accessToken);
           await request.jwtVerify();
-        } catch (error: any) {
+        } catch (error) {
           log.error({ errorJwtVerify: error });
           reply
             .code(403)

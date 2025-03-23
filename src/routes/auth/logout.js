@@ -1,8 +1,7 @@
-import { FastifyReply, FastifyRequest } from "fastify";
 
 export default async function logout(
-  request: FastifyRequest,
-  reply: FastifyReply
+  request,
+  reply
 ) {
   return reply
     .clearCookie("refresh_token")

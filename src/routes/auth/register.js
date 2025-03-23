@@ -1,12 +1,9 @@
 import bcrypt from "bcrypt";
-import { FastifyReply, FastifyRequest } from "fastify";
 import User from "../../database/models/user.model.js";
 
 export default async function register(
-  request: FastifyRequest<{
-    Body: { email: string; password: string; name: string };
-  }>,
-  reply: FastifyReply
+  request,
+  reply
 ) {
   const { email, password, name } = request.body;
   const existingUser = await User.findOne({

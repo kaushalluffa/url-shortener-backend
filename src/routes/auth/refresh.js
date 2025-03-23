@@ -1,10 +1,6 @@
-import { FastifyReply, FastifyRequest } from "fastify";
 import User from "../../database/models/user.model.js";
 
-export default async function refresh(
-  request: FastifyRequest,
-  reply: FastifyReply
-) {
+export default async function refresh(request, reply) {
   const cookies = request.cookies;
   if (!cookies["refresh_token"]) {
     return reply.code(400).send({ message: "No refresh token found" });
@@ -19,7 +15,7 @@ export default async function refresh(
       const decoded = await request.jwtVerify({});
       await User.updateOne(
         {
-          user_id: (decoded as { userId: string }).userId,
+          user_id: decoded.userId,
         },
         { refreshToken: [] }
       );
@@ -40,10 +36,10 @@ export default async function refresh(
     });
 
     const foundUserId = user.user_id.toString();
-    if (foundUserId !== (decoded as { userId: string }).userId) {
+    if (foundUserId !== decoded.userId) {
       request.log.info({ errorHere: "User ID mismatch" });
       await User.updateOne(
-        { user_id: (decoded as { userId: string }).userId },
+        { user_id: decoded.userId },
         { refreshToken: newRefreshTokens }
       );
       return reply.code(403).send({ message: "Forbidden" });

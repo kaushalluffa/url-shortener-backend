@@ -1,7 +1,7 @@
-export function decimalToBase62(decimal: number): string {
+export function decimalToBase62(decimal) {
   const base62Chars =
     "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  let remainder: number[] = [];
+  let remainder= [];
   let quotient = decimal;
   let result = "";
 
@@ -12,7 +12,7 @@ export function decimalToBase62(decimal: number): string {
   result = base62Chars[quotient];
 
   while (remainder.length > 0) {
-    result += base62Chars[remainder.pop()!];
+    result += base62Chars[remainder.pop()];
   }
 
   return result;

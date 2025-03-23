@@ -1,17 +1,9 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model } from "mongoose";
 
-// Define the interface for the URL mapping document
-export interface IUrlMapping extends Document {
-  short_url: string;
-  long_url: string;
-  created_at: Date;
-  expired_on: Date;
-  user_id: Schema.Types.ObjectId;
-  click_count: number;
-}
+
 
 // Create the schema for the URL mapping
-const UrlMappingSchema = new Schema<IUrlMapping>({
+const UrlMappingSchema = new Schema({
   short_url: { type: String, required: true, unique: true },
   long_url: { type: String, required: true },
   created_at: { type: Date, default: Date.now },
@@ -21,6 +13,6 @@ const UrlMappingSchema = new Schema<IUrlMapping>({
 });
 
 // Create the model for the URL mapping
-const UrlMapping = model<IUrlMapping>("UrlMapping", UrlMappingSchema);
+const UrlMapping = model("UrlMapping", UrlMappingSchema);
 
 export default UrlMapping;

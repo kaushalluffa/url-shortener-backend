@@ -1,4 +1,3 @@
-import { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 import closeWithGrace from "close-with-grace";
 import fastify from "fastify";
 import fp from "fastify-plugin";
@@ -28,7 +27,7 @@ const server = fastify({
       removeAdditional: "all", // Remove additional body properties
     },
   },
-}).withTypeProvider<TypeBoxTypeProvider>();
+}).withTypeProvider();
 
 async function init() {
   // Register your application as a normal plugin.

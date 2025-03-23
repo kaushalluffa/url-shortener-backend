@@ -1,11 +1,10 @@
-import { FastifySchema } from "fastify"
 import { email, name, password } from "../common.js"
 
 
 const registerResponseProperties = {
     message: { type: 'string' }
 }
-export const registerSchema: FastifySchema = {
+export const registerSchema = {
     body: {
         type: 'object',
         properties: {

@@ -1,10 +1,9 @@
-import { FastifyReply, FastifyRequest } from "fastify";
-import User from "../../database/models/user.model.js";
 import bcrypt from "bcrypt";
+import User from "../../database/models/user.model.js";
 
 export default async function login(
-  request: FastifyRequest<{ Body: { email: string; password: string } }>,
-  reply: FastifyReply
+  request,
+  reply
 ) {
   const { email, password } = request.body;
   const user = await User.findOne({ email });

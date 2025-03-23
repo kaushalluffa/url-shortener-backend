@@ -1,9 +1,8 @@
-import { FastifyReply, FastifyRequest } from "fastify";
 import UrlMapping from "../../database/models/url-mapping.model.js";
 
 export const listUrls = async (
-  request: FastifyRequest<{ Querystring: { page: string; perPage: string, search: string } }>,
-  reply: FastifyReply
+  request,
+  reply
 ) => {
   const { page = "1", perPage = "10", search = '' } = request.query;
   const listOfUrlsPromise = UrlMapping.find({

@@ -1,4 +1,4 @@
-import cors, { FastifyCorsOptions } from "@fastify/cors";
+import cors from "@fastify/cors";
 import fp from "fastify-plugin";
 
 /**
@@ -7,7 +7,7 @@ import fp from "fastify-plugin";
  * @see {@link https://github.com/fastify/fastify-cors}
  */
 export default fp(async (fastify) => {
-  const autoConfig: FastifyCorsOptions = {
+  const autoConfig = {
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     origin: fastify.config.CORS_ORIGIN_URL,
     credentials: true,

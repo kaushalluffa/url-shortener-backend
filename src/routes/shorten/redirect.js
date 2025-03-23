@@ -1,9 +1,8 @@
-import { FastifyReply, FastifyRequest } from "fastify";
 import UrlMapping from "../../database/models/url-mapping.model.js";
 
 export default async function redirect(
-  request: FastifyRequest<{ Params: { short_url: string } }>,
-  reply: FastifyReply
+  request,
+  reply
 ) {
   const { short_url } = request.params;
   const longUrl = await UrlMapping.findOne({

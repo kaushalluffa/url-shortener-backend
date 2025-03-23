@@ -1,12 +1,9 @@
-import { FastifyReply, FastifyRequest } from "fastify";
 import UrlMapping from "../../database/models/url-mapping.model.js";
 import generateUrlShortCode from "../../utils/generateUrlShortCode.js";
 
 export default async function shorten(
-  request: FastifyRequest<{
-    Body: { long_url: string; custom_alias?: string };
-  }>,
-  reply: FastifyReply
+  request,
+  reply
 ) {
   const { long_url } = request.body;
   const shortUrlBase62Code = await generateUrlShortCode(long_url);

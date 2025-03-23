@@ -1,15 +1,9 @@
 import fp from "fastify-plugin";
-import { FastifyInstance } from "fastify";
-import { MongoClient, Db } from "mongodb";
+import { MongoClient } from "mongodb";
 import mongoose from "mongoose";
-declare module "fastify" {
-  export interface FastifyInstance {
-    mongo: Db;
-    mongoose: typeof mongoose;
-  }
-}
 
-export const mongoConfig = (fastify: FastifyInstance) => {
+
+export const mongoConfig = (fastify) => {
   const uri = fastify.config.MONGODB_URI;
   if (!uri) {
     throw new Error("MONGODB_URI is not defined");
@@ -17,7 +11,7 @@ export const mongoConfig = (fastify: FastifyInstance) => {
   return uri;
 };
 export default fp(
-  async (fastify: FastifyInstance, opts) => {
+  async (fastify, opts) => {
     const uri = mongoConfig(fastify);
     try {
       const client = new MongoClient(uri);

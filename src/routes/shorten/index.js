@@ -1,11 +1,10 @@
-import { FastifyInstance } from "fastify";
-import shorten from "./shorten.js";
-import redirect from "./redirect.js";
-import { shortenSchema } from "../../schemas/shorten/shorten.js";
 import { redirectSchema } from "../../schemas/shorten/redirect.js";
+import { shortenSchema } from "../../schemas/shorten/shorten.js";
 import { listUrls } from "./list.js";
+import redirect from "./redirect.js";
+import shorten from "./shorten.js";
 
-export default async function shortenRoutes(fastify: FastifyInstance) {
+export default async function shortenRoutes(fastify) {
   fastify.post(
     "/create-short-url",
     { onRequest: [fastify.authenticate], schema: shortenSchema },
