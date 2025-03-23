@@ -8,8 +8,8 @@ import fp from "fastify-plugin";
  */
 export default fp(async (fastify) => {
   const autoConfig = {
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    origin: process.env.CORS_ORIGIN_URL,
+    // methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    // origin: process.env.CORS_ORIGIN_URL,
     credentials: true,
   };
   await fastify.register(cors, autoConfig);
