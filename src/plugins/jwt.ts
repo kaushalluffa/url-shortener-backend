@@ -18,7 +18,7 @@ export default fp(
       async (request: FastifyRequest, reply: FastifyReply) => {
         const { jwt, log } = fastify;
         try {
-          const authHeaders = request.headers.authorization
+          const authHeaders = request.headers.authorization;
           if (!authHeaders?.startsWith("Bearer ")) {
             throw new Error("No authorization header found");
           }
@@ -26,11 +26,11 @@ export default fp(
           jwt.verify(accessToken);
           await request.jwtVerify();
         } catch (error: any) {
-          log.error(error);
+          log.error({ errorJwtVerify: error });
           reply
-            .code(401)
+            .code(403)
             .header("Content-type", "application/json; charset=utf-8")
-            .send({ statusCode: 401, message: error.message });
+            .send({ statusCode: 403, message: error.message });
         }
       }
     );
