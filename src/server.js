@@ -51,6 +51,14 @@ async function init() {
   try {
     // Start listening.
     await server.listen({ port: process.env.PORT ?? 10000, host: process.env.HOST });
+    server.log.info(
+      {
+        port: process.env.PORT,
+        host: process.env.HOST,
+        CORS_URL: process.env.CORS_ORIGIN_URL,
+      },
+      "Server started"
+    );
   } catch (err) {
     server.log.error(err);
     process.exit(1);

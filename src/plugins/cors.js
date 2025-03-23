@@ -12,6 +12,5 @@ export default fp(async (fastify) => {
     origin: fastify.config.CORS_ORIGIN_URL,
     credentials: true,
   };
-  fastify.log.info(autoConfig);
   await fastify.register(cors, autoConfig);
 });
