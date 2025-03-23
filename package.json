@@ -1,7 +1,7 @@
 {
-  "name": "fastify-demo",
+  "name": "url-shortener-backend",
   "version": "0.0.0",
-  "description": "Fastify demo!",
+  "description": "URL Shortener Backend",
   "main": "app.js",
   "type": "module",
   "directories": {
