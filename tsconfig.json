@@ -4,7 +4,8 @@
     "outDir": "dist",
     "rootDir": "src",
     "target": "ES2016",
-    "moduleResolution": "nodenext"
+    "moduleResolution": "nodenext",
+    "module": "NodeNext"
   },
   "include": ["@types", "src/**/*.ts"]
 }

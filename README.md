@@ -35,7 +35,6 @@ Create a `.env` file and configure necessary variables:
 PORT=3030
 MONGODB_URI='mongodb://localhost:27017'
 MONGODB_DB_NAME=''
-MONGODB_HEALTH_CHECK_COLLECTION='mongodb_health_check_collection'
 JWT_SECRET_KEY=''
 ```
 
