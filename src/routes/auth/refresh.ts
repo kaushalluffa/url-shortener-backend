@@ -32,7 +32,7 @@ export default async function refresh(
     (rt) => rt !== refreshTokenFromCookies
   );
   try {
-      const decoded = await new Promise((resolve, reject) => {
+    const decoded = await new Promise((resolve, reject) => {
       request.server.jwt.verify(refreshTokenFromCookies, (err, decoded) => {
         if (err) reject(err);
         else resolve(decoded);
@@ -65,6 +65,7 @@ export default async function refresh(
       .setCookie("refresh_token", newRefreshToken, {
         httpOnly: true,
         secure: request.server.config.NODE_ENV === "production",
+        path: "/",
       })
       .code(200)
       .send({ accessToken: newAccessToken, user });
@@ -74,6 +75,8 @@ export default async function refresh(
       { user_id: user.user_id },
       { refreshToken: newRefreshTokens }
     );
-    return reply.code(403).send({ message: "Invalid token please login again" });
+    return reply
+      .code(403)
+      .send({ message: "Invalid token please login again" });
   }
 }
