@@ -50,7 +50,7 @@ async function init() {
 
   try {
     // Start listening.
-    await server.listen({ port: process.env.PORT ?? 3000 });
+    await server.listen({ port: process.env.PORT ?? 10000, host: process.env.HOST });
   } catch (err) {
     server.log.error(err);
     process.exit(1);
